@@ -24,7 +24,7 @@ class LinkedList {
 
   push(val) {
     const newNode = new Node(val)
-    this.head === null? this.head = newNode : this.tail.next = newNode;
+    this.head === null ? this.head = newNode : this.tail.next = newNode;
 
     this.tail = newNode;
     this.length++;
@@ -48,7 +48,7 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
-    if (this.length === 0) return null;
+    if (this.length === 0) throw new Error("No more items to remove");
 
     let current = this.head;
     const last = this.tail
@@ -74,6 +74,7 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
+    if (this.length === 0) throw new Error("No more items to remove");
     const oldHead = this.head;
 
     if (this.length === 1) {
@@ -92,7 +93,7 @@ class LinkedList {
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
-    if (idx === NaN) return "Invalid Index";
+    if (idx === NaN) throw new Error ("Invalid index");
 
     let current = this.head
     let i = 0;
@@ -108,7 +109,7 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-    if (idx === NaN) return "Invalid Index";
+    if (idx === NaN) throw new Error ("Invalid index");
 
     let current = this.head;
     let i = 0;
@@ -126,7 +127,7 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
-    if (idx === NaN) return "Invalid Index";
+    if (idx === NaN) throw new Error ("Invalid index");
 
     let newNode = new Node(val)
 
@@ -150,7 +151,7 @@ class LinkedList {
     if (current === this.head) this.head = newNode;
 
     oldNode === null ? this.tail = newNode : newNode.next = oldNode;
-  
+
     this.length++;
   }
 
@@ -158,7 +159,7 @@ class LinkedList {
 
   removeAt(idx) {
     if (idx === NaN) return "Error";
-   
+
 
     if (this.length === 1) {
       let item = this.head;
@@ -177,8 +178,8 @@ class LinkedList {
     }
 
     let item = current.next;
-    
-    if(current === this.head) this.head = item
+
+    if (current === this.head) this.head = item
     current.next == current.next.next
 
     if (current.next === null) this.tail = current;
@@ -196,7 +197,7 @@ class LinkedList {
 
     let current = this.head
 
-    while(current !== null) {
+    while (current !== null) {
       total = total + current.val
       current = current.next;
     }
