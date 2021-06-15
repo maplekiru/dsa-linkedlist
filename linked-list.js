@@ -23,8 +23,8 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
-    const newNode = new Node(val)
-    this.head === null ? this.head = newNode : this.tail.next = newNode;
+    const newNode = new Node(val);
+    this.head === null ? this.head = newNode : this.tail.next = newNode; // make an if condition
 
     this.tail = newNode;
     this.length++;
@@ -33,7 +33,7 @@ class LinkedList {
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
-    const newNode = new Node(val)
+    const newNode = new Node(val);
     if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
@@ -46,7 +46,6 @@ class LinkedList {
   }
 
   /** pop(): return & remove last item. */
-
   pop() {
     if (this.length === 0) throw new Error("No more items to remove");
 
@@ -72,7 +71,6 @@ class LinkedList {
   }
 
   /** shift(): return & remove first item. */
-
   shift() {
     if (this.length === 0) throw new Error("No more items to remove");
     const oldHead = this.head;
@@ -91,14 +89,13 @@ class LinkedList {
   }
 
   /** getAt(idx): get val at idx. */
-
   getAt(idx) {
     if (idx === NaN) throw new Error ("Invalid index");
 
     let current = this.head
     let i = 0;
 
-    while (i < idx) {
+    while (i < idx) { // TODO: make a for loop
       current = current.next;
       i++
     }
@@ -107,7 +104,6 @@ class LinkedList {
   }
 
   /** setAt(idx, val): set val at idx to val */
-
   setAt(idx, val) {
     if (idx === NaN) throw new Error ("Invalid index");
 
@@ -125,16 +121,15 @@ class LinkedList {
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
-
   insertAt(idx, val) {
-    if (idx === NaN) throw new Error ("Invalid index");
+    if (idx === NaN) throw new Error ("Invalid index"); // catch the "bad" index error
 
     let newNode = new Node(val)
 
     if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
-      this.length++;
+      this.length = 1;
       return undefined;
     }
 
@@ -150,13 +145,12 @@ class LinkedList {
     current.next = newNode;
     if (current === this.head) this.head = newNode;
 
-    oldNode === null ? this.tail = newNode : newNode.next = oldNode;
+    oldNode === null ? this.tail = newNode : newNode.next = oldNode; //TODO": make an if condition
 
     this.length++;
   }
 
   /** removeAt(idx): return & remove item at idx, */
-
   removeAt(idx) {
     if (idx === NaN) return "Error";
 
@@ -169,7 +163,7 @@ class LinkedList {
       return item;
     }
 
-    let current = this.head;
+    let current = this.head; //make name previous current
     let i = 0;
 
     while (i < idx - 1) {
@@ -187,22 +181,21 @@ class LinkedList {
 
     this.length--;
 
-    return item.val
+    return item.val;
   }
 
   /** average(): return an average of all values in the list */
-
   average() {
-    let total = 0;
+    let total = 0; //make total, sum
 
-    let current = this.head
+    let current = this.head;
 
     while (current !== null) {
-      total = total + current.val
+      total = total + current.val;
       current = current.next;
     }
 
-    let avg = total / this.length || 0
+    const avg = total / this.length || 0;
     return avg
   }
 }
