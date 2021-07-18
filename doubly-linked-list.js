@@ -3,6 +3,7 @@
 class Node {
   val = null;
   next = null;
+  previous = null;
 
   constructor(val) {
     this.val = val;
@@ -11,7 +12,7 @@ class Node {
 
 /** LinkedList: chained together nodes. */
 
-class LinkedList {
+class DoublyLinkedList {
   head = null;
   tail = null;
   length = 0;
@@ -20,20 +21,23 @@ class LinkedList {
     for (let val of vals) this.push(val);
   }
 
-  /** push(val): add new value to end of list. */
-
   push(val) {
-    const newNode = new Node(val);
-    this.head === null ? this.head = newNode : this.tail.next = newNode; // make an if condition
-
-    this.tail = newNode;
+    newNode = Node(val);
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      newNode.previous = this.tail;
+      this.tail = newNode;
+    }
     this.length++;
   }
 
   /** unshift(val): add new value to start of list. */
-
   unshift(val) {
     const newNode = new Node(val);
+
     if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
@@ -42,32 +46,25 @@ class LinkedList {
       this.head = newNode;
       this.head.next = oldHead;
     }
+
     this.length++;
   }
 
   /** pop(): return & remove last item. */
   pop() {
-    if (this.length === 0) throw new Error("No more items to remove");
+    if (this.head === null) throw new Error("No more items to remove");
 
-    let current = this.head;
-    const last = this.tail
-
+    const lastNode = this.tail;
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
-      this.length--;
-      return current.val;
+    } else {
+      let newTail = this.tail.previous;
+      newTail.next = null;
+      this.tail = newTail;
     }
 
-    while (current.next !== last) {
-      current = current.next;
-    }
-
-    this.tail = current;
-    this.tail.next = null;
-    this.length--;
-
-    return last.val;
+    return lastNode.val;
   }
 
   /** shift(): return & remove first item. */
@@ -198,25 +195,4 @@ class LinkedList {
     const avg = total / this.length || 0;
     return avg
   }
-
-  // /** reverse(): reverses linked list in place */
-  // reverse() {
-  //   let current = this.head
-  //   this.tail = this.head
-
-  //   while (current.next !== null) {
-  //     current.next.next = current
-  //   }
-  // }
-
-  /** pivot(): pivot list around a value */
-  pivot(val) {
-    let current = this.head
-
-    while(current !== null) {
-      
-    }
-  }
 }
-
-module.exports = LinkedList;

@@ -87,7 +87,7 @@ class Stack {
     this.length++;
   }
 
-  /** pop(): return & remove first item on top of stack. */
+  /** shift(): return & remove first item on top of stack. */
 
   shift() {
     if (this.length === 0) throw new Error("No more items in queue");
